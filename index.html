@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartResume - Build Your Resume, Find Your Dream Job</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #0d9488;
+            --primary-light: #ccfbf1;
+            --primary-dark: #0f766e;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --bg-light: #f0fdfa;
+            --bg-offset: #f1f5f9;
+            --border: #99f6e4;
+            --radius: 12px;
+            --radius-btn: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+            text-decoration: none;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.5;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 5%;
+            background: var(--bg-light);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            background: var(--primary);
+            color: white;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.1;
+        }
+
+        .logo-sub {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-btn);
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-item:hover {
+            background: var(--bg-offset);
+        }
+
+        .nav-item.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn-icon {
+            background: var(--bg-offset);
+            border: 1px solid var(--border);
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: 0.2s;
+        }
+
+        .btn-icon:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-signin {
+            background: var(--primary);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: var(--radius-btn);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: background 0.2s;
+        }
+
+        .btn-signin:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .badge {
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 0.5rem 1.25rem;
+            border-radius: 99px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(147, 51, 234, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            color: #0f172a;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin-bottom: 3rem;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 4rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 6px -1px rgba(13, 148, 136, 0.2), 0 2px 4px -1px rgba(13, 148, 136, 0.1);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(13, 148, 136, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--bg-offset);
+            color: var(--text-main);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            border-color: var(--primary);
+        }
+
+        /* Features */
+        .features {
+            display: flex;
+            gap: 2.5rem;
+            justify-content: center;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .feature-icon {
+            width: 20px;
+            height: 20px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+        }
+
+        /* Additional Sections */
+        section {
+            padding: 80px 5%;
+            text-align: center;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: #0f172a;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        /* Detailed Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-box {
+            background: var(--bg-offset);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            transition: 0.3s;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(13, 148, 136, 0.2);
+        }
+
+        .feature-box .icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .feature-box h3 {
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .feature-box p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Pricing Grid (Landing Version) */
+        .pricing-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .price-card {
+            background: var(--bg-offset);
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            width: 350px;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .price-card.popular {
+            border: 2px solid var(--primary);
+            transform: scale(1.05);
+        }
+
+        .price-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #0f172a;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .price-features {
+            text-align: left;
+            margin-bottom: 2.5rem;
+            list-style: none;
+        }
+
+        .price-features li {
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-main);
+        }
+
+        .price-features li::before {
+            content: "✓";
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .btn-pricing {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            display: block;
+            border: 2px solid var(--primary);
+            transition: 0.2s;
+            text-align: center;
+        }
+
+        .btn-pricing.outline {
+            color: var(--primary);
+        }
+
+        .btn-pricing.solid {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-pricing.solid:hover {
+            background: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+
+        @media (max-width: 992px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .pricing-grid {
+                gap: 20px;
+            }
+
+            .price-card {
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-btns {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .features {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">
+            <div class="logo-icon">&#128196;</div>
+            <div class="logo-text">
+                <span class="logo-name">LankaResumey</span>
+                <span class="logo-sub">Job Finder</span>
+            </div>
+        </a>
+
+        <div class="nav-links">
+            <a href="index.php" class="nav-item active">
+                <span>&#127968;</span> Home
+            </a>
+            <a href="user/resume_builder.php" class="nav-item">
+                <span>&#128196;</span> Resume Builder
+            </a>
+            <a href="index.php" class="nav-item">
+                <span>&#128188;</span> Find Jobs
+            </a>
+            <a href="admin/" class="nav-item">
+                <span>&#128100;</span> Dashboard
+            </a>
+        </div>
+
+        <div class="nav-actions">
+            <a href="login.php" class="btn-signin">Sign In</a>
+        </div>
+    </nav>
+
+    <main class="hero">
+        <div class="badge">
+            <span>&#10024;</span> AI-Powered Resume &amp; Job Matching
+        </div>
+
+        <h1>Build Your Resume, <span>Find Your Dream Job</span></h1>
+
+        <p>Create professional A4 resumes, let AI scan your skills, and get matched with perfect job opportunities.
+            Apply with one click.</p>
+
+        <div class="hero-btns">
+            <a href="register.php" class="btn-primary">
+                Create Your Resume <span>&rarr;</span>
+            </a>
+            <a href="user/resume_preview.php?demo=true" class="btn-secondary">
+                <span>&#128065;</span> Try Demo
+            </a>
+            <a href="index.php" class="btn-secondary" style="border: none; background: transparent;">
+                <span>&#128188;</span> Browse Jobs
+            </a>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">&#10003;</div>
+                Free to start
+            </div>
+            <div class="feature">
+                <div class="feature-icon">&#10003;</div>
+                PDF Export
+            </div>
+            <div class="feature">
+                <div class="feature-icon">&#10003;</div>
+                AI Matching
+            </div>
+        </div>
+    </main>
+
+    <!-- Why Choose Us -->
+    <section id="features">
+        <div class="section-title">
+            <h2>Everything you need to <span>Succeed</span></h2>
+            <p>From visual resumes to direct job banking, we offer the most complete career toolkit in Sri Lanka.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-box">
+                <span class="icon">🎨</span>
+                <h3>6 Pro Templates</h3>
+                <p>Choose from professional minimalist to creative sidebar layouts tailored for various industries.</p>
+            </div>
+            <div class="feature-box">
+                <span class="icon">🔍</span>
+                <h3>ATS-Friendly</h3>
+                <p>Our resumes are designed to pass through Applicant Tracking Systems, ensuring top rankings.</p>
+            </div>
+            <div class="feature-box">
+                <span class="icon">🏦</span>
+                <h3>Bank-Ready (Pro)</h3>
+                <p>Include Sri Lankan bank details directly in your resume for seamless professional identification.</p>
+            </div>
+            <div class="feature-box">
+                <span class="icon">📸</span>
+                <h3>Photo Optimized</h3>
+                <p>Showcase your professional brand with beautifully integrated circular profile photos.</p>
+            </div>
+            <div class="feature-box">
+                <span class="icon">💼</span>
+                <h3>Smart Matching</h3>
+                <p>Our AI scans your skills and suggests the most relevant jobs in the local market.</p>
+            </div>
+            <div class="feature-box">
+                <span class="icon">⚡</span>
+                <h3>Instant Export</h3>
+                <p>Download your resume as a high-quality PDF ready for printing or email application.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" style="background: var(--bg-offset);">
+        <div class="section-title">
+            <h2>Fair & Transparent <span>Pricing</span></h2>
+            <p>Choose the plan that fits your career stage. Upgrade or downgrade at any time.</p>
+        </div>
+
+        <div class="pricing-grid">
+            <div class="price-card">
+                <h3>Free</h3>
+                <div class="price">$0<span>/lifetime</span></div>
+                <ul class="price-features">
+                    <li>1 Resume export</li>
+                    <li>2 Basic Templates</li>
+                    <li>PDF Export (Standard)</li>
+                    <li>Basic Job Search</li>
+                </ul>
+                <a href="register.php" class="btn-pricing outline">Get Started</a>
+            </div>
+
+            <div class="price-card popular">
+                <div
+                    style="position: absolute; top: 15px; right: 20px; background: var(--primary); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold;">
+                    POPULAR</div>
+                <h3>Pro Monthly</h3>
+                <div class="price">$5<span>/month</span></div>
+                <ul class="price-features">
+                    <li>Unlimited Resumes</li>
+                    <li>All 6 Premium Templates</li>
+                    <li>Professional Bank Details</li>
+                    <li>Profile Photo Support</li>
+                    <li>ATS Gap Analysis</li>
+                </ul>
+                <a href="register.php" class="btn-pricing solid">Upgrade to Pro</a>
+            </div>
+
+            <div class="price-card">
+                <h3>Pro Yearly</h3>
+                <div class="price">$15<span>/year</span></div>
+                <ul class="price-features">
+                    <li>Everything in Monthly</li>
+                    <li>75% Savings Yearly</li>
+                    <li>Priority Support</li>
+                    <li>Exclusive Future Updates</li>
+                </ul>
+                <a href="register.php" class="btn-pricing solid">Save with Yearly</a>
+            </div>
+        </div>
+    </section>
+
+    <footer
+        style="padding: 40px 5%; border-top: 1px solid var(--border); text-align: center; color: var(--text-muted); font-size: 0.9rem;">
+        <p>&copy; 2026 LankaResumey. All rights reserved. Built for Sri Lankan Professionals.</p>
+    </footer>
+
+</body>
+
+</html>
